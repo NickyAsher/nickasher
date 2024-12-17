@@ -21,10 +21,12 @@ class InputHandler {
 
     onEnterPress(event) {
         if (event.key === 'Enter') {
-            console.log('Enter key pressed. Input value:', event.target.value);
+            let tickerInput = event.target.value;
+            console.log('Enter key pressed. Input value:', tickerInput);
+            getCurrentPrice(tickerInput)
         }
     }
 }
 
-const inputHandler = new InputHandler('#myInput');
+const inputHandler = new InputHandler('#tickerInput');
 inputHandler.init();

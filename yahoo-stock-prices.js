@@ -1,4 +1,4 @@
-const baseUrl = 'https://finance.yahoo.com/quote/';
+const baseUrl = 'https://finance.yahoo.com/';
 
 /**
  * @param {number} startMonth
@@ -30,10 +30,6 @@ const getHistoricalPrices = function (
     const url = `${baseUrl + ticker}/history?period1=${startDate}&period2=${endDate}&interval=${frequency}&filter=history&frequency=${frequency}`;
 
     const promise = fetch(url)
-        .then((res) => {
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-            return res.text();
-        })
         .then((body) => {
             try {
                 const prices = JSON.parse(body.split('HistoricalPriceStore\":{\"prices\":')[1].split(',"isPending')[0]);
@@ -58,13 +54,9 @@ const getHistoricalPrices = function (
  * @return {Promise<{price: number, currency: string}>}
  */
 const getCurrentData = function (ticker) {
-    const url = `${baseUrl + ticker}/`;
+    const url = `${baseUrl + "lookup/?s=" + ticker}`;
 
     return fetch(url)
-        .then((res) => {
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-            return res.text();
-        })
         .then((body) => {
             try {
                 let price = body.split(`"${ticker}":{"sourceInterval"`)[1]
@@ -105,10 +97,4 @@ const getCurrentPrice = function (ticker, callback) {
         return getCurrentData(ticker)
             .then((data) => data.price);
     }
-};
-
-module.exports = {
-    getHistoricalPrices,
-    getCurrentData,
-    getCurrentPrice,
 };
