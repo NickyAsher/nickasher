@@ -9,6 +9,8 @@
     <link href="main.css" rel="stylesheet">
     <script src="yahoo-stock-prices.js" defer></script>
     <script src="init.js" defer></script>
+    <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3940_RC01/embed_loader.js"></script>
+
 </head>
 
 <body id="iau9">
@@ -22,13 +24,18 @@
 <div class="gjs-grid-row" id="i4c6p">
     <div class="gjs-grid-column"></div>
     <div class="gjs-grid-column" id="i1e7d">
-        <input type="text" id="tickerInput"/>
+        <input type="text" id="ticker-input"/>
     </div>
     <div class="gjs-grid-column"></div>
 </div>
 <div class="gjs-divider" id="ifxel"></div>
 <div class="gjs-grid-row" id="iigjo">
-    <div class="gjs-grid-column" id="itbf4"><label id="ipqb2"><b id="igqsi">Search trend</b></label></div>
+    <div class="gjs-grid-column" id="search-trend">
+        <label id="ipqb2"><b id="igqsi">Search trend</b></label>
+        <div id="search-trend-result">
+            Google trends
+        </div>
+    </div>
     <div class="gjs-grid-column"><b id="i2piw">Price</b></div>
     <div class="gjs-grid-column"><b id="itv67">Competitors</b></div>
 </div>

@@ -22,11 +22,22 @@ class InputHandler {
     onEnterPress(event) {
         if (event.key === 'Enter') {
             let tickerInput = event.target.value;
-            console.log('Enter key pressed. Input value:', tickerInput);
-            getCurrentPrice(tickerInput)
+            this.addGoogleTrendResult(tickerInput);
+            getCurrentPrice(tickerInput);
         }
+    }
+
+    addGoogleTrendResult(tickerInput) {
+        let trendResultDiv = document.getElementById("search-trend-result");
+        trendResultDiv.innerHTML = '';
+
+        let googleSearchTrendsScript = document.createElement('script');
+        googleSearchTrendsScript.type = 'text/javascript';
+        googleSearchTrendsScript.innerHTML = `var targetDiv = document.getElementById('search-trend-result'); trends.embed.renderExploreWidgetTo(targetDiv, "TIMESERIES", {"comparisonItem":[{"keyword":"` + tickerInput + `","geo":"","time":"today 3-m"}],"category":7,"property":""}, {"exploreQuery":"cat=7&date=today%203-m&q=BBBY&hl=en","guestPath":"https://trends.google.com:443/trends/embed/"}); `
+        let bodyDiv = document.getElementById("iau9");
+        bodyDiv.appendChild(googleSearchTrendsScript);
     }
 }
 
-const inputHandler = new InputHandler('#tickerInput');
+const inputHandler = new InputHandler('#ticker-input');
 inputHandler.init();
